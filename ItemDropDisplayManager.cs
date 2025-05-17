@@ -225,7 +225,7 @@ public class ItemDropDisplayManager : MonoBehaviour
             }
 
             // world→screen
-            Vector3 sp = cam.WorldToScreenPoint(drop.transform.position + worldOffset);
+            Vector3 sp = cam.WorldToScreenPoint(drop.transform.position + worldOffset - (SubtractCamOffset.Value.IsOn() ? GameCamera.m_instance.GetCameraOffset(Player.m_localPlayer) : Vector3.zero));
             bool show = sp.z >= 0f;
             if (worldItemGo.activeSelf != show) worldItemGo.SetActive(show);
             if (!show) continue;

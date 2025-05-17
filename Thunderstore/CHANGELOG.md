@@ -1,3 +1,4 @@
-| `Version` | `Update Notes`    |
-|-----------|-------------------|
-| 1.0.0     | - Initial Release |
+| `Version` | `Update Notes`                                                                                                                                                          |
+|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.0.1     | - Add a configuration option to subtract the Game camera's offset from the world item display position, might help it look more centered on the object. Defaulted to ON |
+| 1.0.0     | - Initial Release                                                                                                                                                       |

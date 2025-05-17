@@ -13,7 +13,7 @@ namespace WorldItemDropDisplay
     public class WorldItemDropDisplayPlugin : BaseUnityPlugin
     {
         internal const string ModName = "WorldItemDropDisplay";
-        internal const string ModVersion = "1.0.0";
+        internal const string ModVersion = "1.0.1";
         internal const string Author = "Azumatt";
         private const string ModGUID = $"{Author}.{ModName}";
         private static string ConfigFileName = $"{ModGUID}.cfg";
@@ -26,6 +26,12 @@ namespace WorldItemDropDisplay
         private DateTime _lastConfigReloadTime;
         private const long RELOAD_DELAY = 10000000; // One second
 
+        public enum Toggle
+        {
+            Off,
+            On
+        }
+        
         public void Awake()
         {
             bool saveOnSet = Config.SaveOnConfigSet;
@@ -35,6 +41,7 @@ namespace WorldItemDropDisplay
             ItemDataInterval = config("1 - General", "Data Interval", 0.01f, "How often (seconds) to refresh data on the item");
             ItemMaxDisplayDistance = config("1 - General", "Max Display Distance", 5f, "Maximum distance to show the world item display");
             ItemWorldOffset = config("1 - General", "World Item Offset", new Vector3(0, 1.2f, 0), "Offset that the world item display will be relative to the item");
+            SubtractCamOffset = config("1 - General", "Subtract Camera Offset", Toggle.On, "Subtract the camera offset from the world item display position, might help it look more centered on the object.");
 
             ItemPositionInterval.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdatePositionInterval(ItemPositionInterval.Value); };
             ItemDataInterval.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdateDataInterval(ItemDataInterval.Value); };
@@ -121,6 +128,7 @@ namespace WorldItemDropDisplay
         internal static ConfigEntry<float> ItemDataInterval = null!;
         internal static ConfigEntry<float> ItemMaxDisplayDistance = null!;
         internal static ConfigEntry<Vector3> ItemWorldOffset = null!;
+        internal static ConfigEntry<Toggle> SubtractCamOffset = null!;
 
         private ConfigEntry<T> config<T>(string group, string name, T value, ConfigDescription description)
         {
@@ -134,5 +142,18 @@ namespace WorldItemDropDisplay
         }
 
         #endregion
+    }
+    
+    public static class ToggleExtensions
+    {
+        public static bool IsOn(this WorldItemDropDisplayPlugin.Toggle toggle)
+        {
+            return toggle == WorldItemDropDisplayPlugin.Toggle.On;
+        }
+
+        public static bool IsOff(this WorldItemDropDisplayPlugin.Toggle toggle)
+        {
+            return toggle == WorldItemDropDisplayPlugin.Toggle.Off;
+        }
     }
 }

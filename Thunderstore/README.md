@@ -1,4 +1,5 @@
 # WorldItemDropDisplay
+
 ![https://github.com/AzumattDev/WorldItemDropDisplay/blob/master/Thunderstore/icon.png?raw=true](https://github.com/AzumattDev/WorldItemDropDisplay/blob/master/Thunderstore/icon.png?raw=true)
 
 ## A **client-side** Valheim mod that shows floating UI markers above dropped items in the world, giving you at-a-glance info (for items in range) on:
@@ -19,21 +20,20 @@
 All settings live in `BepInEx/config/Azumatt.WorldItemDropDisplay.cfg` (or use BepInEx’s in-game Config Manager). Edit
 by hand or via UI, either way, changes reload on the fly.
 
-| Setting                  | Description                                       | Default       |
-|--------------------------|---------------------------------------------------|---------------|
-| **Position Interval**    | How often (seconds) to refresh UI positions       | `0.01`        |
-| **Data Interval**        | How often (seconds) to refresh stack/quality data | `0.01`        |
-| **Max Display Distance** | Maximum distance (meters) at which markers appear | `5.0`         |
-| **World Item Offset**    | Offset `(X, Y, Z)` relative to each item          | `(0, 1.2, 0)` |
-
+| Setting                    | Description                                                                                                      | Default       |
+|----------------------------|------------------------------------------------------------------------------------------------------------------|---------------|
+| **Position Interval**      | How often (seconds) to refresh UI positions                                                                      | `0.01`        |
+| **Data Interval**          | How often (seconds) to refresh stack/quality data                                                                | `0.01`        |
+| **Max Display Distance**   | Maximum distance (meters) at which markers appear                                                                | `5.0`         |
+| **World Item Offset**      | Offset `(X, Y, Z)` relative to each item                                                                         | `(0, 1.2, 0)` |
+| **Subtract Camera Offset** | Subtract the camera offset from the world item display position, might help it look more centered on the object. | `On`          |
 
 ## Features
 
 - **Real-time data**: Stack, quality, durability, teleport status, food effect, and equip status update automatically.
-- **Low GC & smooth**: Uses object pooling, caching, and early-exit checks to minimize garbage collection and per-frame work.
+- **Low GC & smooth**: Uses object pooling, caching, and early-exit checks to minimize garbage collection and per-frame
+  work.
 - **Live config reload**: Change your `.cfg` by hand and see it apply immediately—no restart required.
-
-
 
 ## Installation Instructions
 
@@ -68,7 +68,6 @@ by hand or via UI, either way, changes reload on the fly.
 
 3. **Click the Download button to install the mod.**
 4. **Launch the game.**
-
 
 <br>
 <br>
