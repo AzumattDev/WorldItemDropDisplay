@@ -1,0 +1,9 @@
+{
+  "name": "WorldItemDropDisplay",
+  "version_number": "1.0.0",
+  "website_url": "https://discord.gg/pdHgy6Bsng",
+  "description": "A client-side Valheim mod that shows floating UI markers above dropped items in the world, giving you at-a-glance info of items in range.",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.2202"
+  ]
+}
