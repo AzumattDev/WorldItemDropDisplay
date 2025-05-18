@@ -13,7 +13,7 @@ namespace WorldItemDropDisplay
     public class WorldItemDropDisplayPlugin : BaseUnityPlugin
     {
         internal const string ModName = "WorldItemDropDisplay";
-        internal const string ModVersion = "1.0.1";
+        internal const string ModVersion = "1.0.2";
         internal const string Author = "Azumatt";
         private const string ModGUID = $"{Author}.{ModName}";
         private static string ConfigFileName = $"{ModGUID}.cfg";
@@ -41,7 +41,7 @@ namespace WorldItemDropDisplay
             ItemDataInterval = config("1 - General", "Data Interval", 0.01f, "How often (seconds) to refresh data on the item");
             ItemMaxDisplayDistance = config("1 - General", "Max Display Distance", 5f, "Maximum distance to show the world item display");
             ItemWorldOffset = config("1 - General", "World Item Offset", new Vector3(0, 1.2f, 0), "Offset that the world item display will be relative to the item");
-            SubtractCamOffset = config("1 - General", "Subtract Camera Offset", Toggle.On, "Subtract the camera offset from the world item display position, might help it look more centered on the object.");
+            SubtractCamOffset = config("1 - General", "Subtract Camera Offset", Toggle.Off, "Subtract the camera offset from the world item display position, might help it look more centered on the object.");
 
             ItemPositionInterval.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdatePositionInterval(ItemPositionInterval.Value); };
             ItemDataInterval.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdateDataInterval(ItemDataInterval.Value); };

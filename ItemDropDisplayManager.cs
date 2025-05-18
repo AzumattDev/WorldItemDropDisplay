@@ -85,7 +85,7 @@ public class ItemDropDisplayManager : MonoBehaviour
 
     private void Start()
     {
-        cam = Camera.main;
+        cam = Utils.GetMainCamera();
 
         // find the template we made in the patch
         template = Tutorial.instance.m_windowRoot.parent.transform.Find("DataDisplayTemplate").gameObject;
@@ -103,6 +103,10 @@ public class ItemDropDisplayManager : MonoBehaviour
             {
                 // instantiate disabled clone of template
                 GameObject? go = Instantiate(template, uiRoot);
+                var rt = go.GetComponent<RectTransform>();
+                rt.pivot = new Vector2(0.5f, 0.5f);
+                rt.anchorMin = new Vector2(0.5f, 0.5f);
+                rt.anchorMax = new Vector2(0.5f, 0.5f);
                 go.SetActive(false);
                 return go;
             },
@@ -183,7 +187,7 @@ public class ItemDropDisplayManager : MonoBehaviour
 
     private void UpdatePositions()
     {
-        if (cam == null) cam = Camera.main;
+        if (cam == null) cam = Utils.GetMainCamera();
         if (playerTransform == null && Player.m_localPlayer != null)
             playerTransform = Player.m_localPlayer.transform;
         if (cam == null || playerTransform == null || worldItems.Count == 0) return;
@@ -225,7 +229,7 @@ public class ItemDropDisplayManager : MonoBehaviour
             }
 
             // world→screen
-            Vector3 sp = cam.WorldToScreenPoint(drop.transform.position + worldOffset - (SubtractCamOffset.Value.IsOn() ? GameCamera.m_instance.GetCameraOffset(Player.m_localPlayer) : Vector3.zero));
+            Vector3 sp = cam.WorldToScreenPointScaled(drop.transform.position + worldOffset - (SubtractCamOffset.Value.IsOn() ? GameCamera.m_instance.GetCameraOffset(Player.m_localPlayer) : Vector3.zero));
             bool show = sp.z >= 0f;
             if (worldItemGo.activeSelf != show) worldItemGo.SetActive(show);
             if (!show) continue;
