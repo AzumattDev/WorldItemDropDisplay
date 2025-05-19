@@ -28,7 +28,6 @@ by hand or via UI, either way, changes reload on the fly.
 | **World Item Offset**      | Offset `(X, Y, Z)` relative to each item                                                                         | `(0, 1.2, 0)` |
 | **Subtract Camera Offset** | Subtract the camera offset from the world item display position, might help it look more centered on the object. | `On`          |
 | **Show Background**        | Show the background behind the item, in the item drop display                                                    | `On`          |
-| **Show Amount**            | Show the amount of items in the stack, in the item drop display                                                  | `On`          |
 
 ## Features
 
