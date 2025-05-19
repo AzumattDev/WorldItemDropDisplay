@@ -51,9 +51,7 @@ namespace WorldItemDropDisplay
 
 
             ShowUIBackground = config("1 - UI", "Show Background", Toggle.On, "Show the background behind the item, in the item drop display");
-            ShowUIAmount = config("1 - UI", "Show Amount", Toggle.On, "Show the amount of items in the stack, in the item drop display");
             ShowUIBackground.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdateUIConfigs(); };
-            ShowUIAmount.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdateUIConfigs(); };
 
 
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -138,7 +136,6 @@ namespace WorldItemDropDisplay
         internal static ConfigEntry<Vector3> ItemWorldOffset = null!;
         internal static ConfigEntry<Toggle> SubtractCamOffset = null!;
         internal static ConfigEntry<Toggle> ShowUIBackground = null!;
-        internal static ConfigEntry<Toggle> ShowUIAmount = null!;
 
         private ConfigEntry<T> config<T>(string group, string name, T value, ConfigDescription description)
         {

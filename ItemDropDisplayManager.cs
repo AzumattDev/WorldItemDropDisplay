@@ -169,7 +169,6 @@ public class ItemDropDisplayManager : MonoBehaviour
         };
 
         worldItem.m_bkg.enabled = ShowUIBackground.Value.IsOn();
-        worldItem.m_amount.enabled = ShowUIAmount.Value.IsOn();
         
         worldItems.Add(worldItem);
     }
@@ -197,7 +196,6 @@ public class ItemDropDisplayManager : MonoBehaviour
         foreach (WorldItem worldItem in worldItems)
         {
             worldItem.m_bkg.enabled = ShowUIBackground.Value.IsOn();
-            worldItem.m_amount.enabled = ShowUIAmount.Value.IsOn();
         }
     }
 
