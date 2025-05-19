@@ -45,6 +45,7 @@ public class ItemDropDisplayManager : MonoBehaviour
         internal Vector2i m_pos;
         internal GameObject m_go = null!;
         internal RectTransform m_rt = null!;
+        internal Image m_bkg = null!;
         internal Image m_icon = null!;
         internal TMP_Text m_amount = null!;
         internal TMP_Text m_quality = null!;
@@ -156,6 +157,7 @@ public class ItemDropDisplayManager : MonoBehaviour
             itemDrop = drop,
             m_go = go,
             m_rt = go.GetComponent<RectTransform>(),
+            m_bkg = go.GetComponent<Image>(),
             m_icon = goTransform.Find("icon").GetComponent<Image>(),
             m_amount = goTransform.Find("amount").GetComponent<TMP_Text>(),
             m_quality = goTransform.Find("quality").GetComponent<TMP_Text>(),
@@ -165,6 +167,10 @@ public class ItemDropDisplayManager : MonoBehaviour
             m_durability = goTransform.Find("durability").GetComponent<GuiBar>(),
             dataDirty = true // force full paint on first UpdateData
         };
+
+        worldItem.m_bkg.enabled = ShowUIBackground.Value.IsOn();
+        worldItem.m_amount.enabled = ShowUIAmount.Value.IsOn();
+        
         worldItems.Add(worldItem);
     }
 
@@ -182,6 +188,16 @@ public class ItemDropDisplayManager : MonoBehaviour
         if (worldItem != null && worldItem.itemDrop != null)
         {
             worldItem.dataDirty = true;
+        }
+    }
+
+    public void UpdateUIConfigs()
+    {
+        if (worldItems.Count == 0) return;
+        foreach (WorldItem worldItem in worldItems)
+        {
+            worldItem.m_bkg.enabled = ShowUIBackground.Value.IsOn();
+            worldItem.m_amount.enabled = ShowUIAmount.Value.IsOn();
         }
     }
 

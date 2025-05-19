@@ -13,7 +13,7 @@ namespace WorldItemDropDisplay
     public class WorldItemDropDisplayPlugin : BaseUnityPlugin
     {
         internal const string ModName = "WorldItemDropDisplay";
-        internal const string ModVersion = "1.0.2";
+        internal const string ModVersion = "1.0.3";
         internal const string Author = "Azumatt";
         private const string ModGUID = $"{Author}.{ModName}";
         private static string ConfigFileName = $"{ModGUID}.cfg";
@@ -31,7 +31,7 @@ namespace WorldItemDropDisplay
             Off,
             On
         }
-        
+
         public void Awake()
         {
             bool saveOnSet = Config.SaveOnConfigSet;
@@ -43,10 +43,18 @@ namespace WorldItemDropDisplay
             ItemWorldOffset = config("1 - General", "World Item Offset", new Vector3(0, 1.2f, 0), "Offset that the world item display will be relative to the item");
             SubtractCamOffset = config("1 - General", "Subtract Camera Offset", Toggle.Off, "Subtract the camera offset from the world item display position, might help it look more centered on the object.");
 
+
             ItemPositionInterval.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdatePositionInterval(ItemPositionInterval.Value); };
             ItemDataInterval.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdateDataInterval(ItemDataInterval.Value); };
             ItemMaxDisplayDistance.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdateMaxDisplayDistance(ItemMaxDisplayDistance.Value); };
             ItemWorldOffset.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdateWorldOffset(ItemWorldOffset.Value); };
+
+
+            ShowUIBackground = config("1 - UI", "Show Background", Toggle.On, "Show the background behind the item, in the item drop display");
+            ShowUIAmount = config("1 - UI", "Show Amount", Toggle.On, "Show the amount of items in the stack, in the item drop display");
+            ShowUIBackground.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdateUIConfigs(); };
+            ShowUIAmount.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdateUIConfigs(); };
+
 
             Assembly assembly = Assembly.GetExecutingAssembly();
             _harmony.PatchAll(assembly);
@@ -129,6 +137,8 @@ namespace WorldItemDropDisplay
         internal static ConfigEntry<float> ItemMaxDisplayDistance = null!;
         internal static ConfigEntry<Vector3> ItemWorldOffset = null!;
         internal static ConfigEntry<Toggle> SubtractCamOffset = null!;
+        internal static ConfigEntry<Toggle> ShowUIBackground = null!;
+        internal static ConfigEntry<Toggle> ShowUIAmount = null!;
 
         private ConfigEntry<T> config<T>(string group, string name, T value, ConfigDescription description)
         {
@@ -143,7 +153,7 @@ namespace WorldItemDropDisplay
 
         #endregion
     }
-    
+
     public static class ToggleExtensions
     {
         public static bool IsOn(this WorldItemDropDisplayPlugin.Toggle toggle)
