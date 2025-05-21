@@ -13,7 +13,7 @@ namespace WorldItemDropDisplay
     public class WorldItemDropDisplayPlugin : BaseUnityPlugin
     {
         internal const string ModName = "WorldItemDropDisplay";
-        internal const string ModVersion = "1.0.4";
+        internal const string ModVersion = "1.0.5";
         internal const string Author = "Azumatt";
         private const string ModGUID = $"{Author}.{ModName}";
         private static string ConfigFileName = $"{ModGUID}.cfg";
@@ -51,7 +51,19 @@ namespace WorldItemDropDisplay
 
 
             ShowUIBackground = config("1 - UI", "Show Background", Toggle.On, "Show the background behind the item, in the item drop display");
-            ShowUIBackground.SettingChanged += (sender, args) => { ItemDropDisplayManager.Instance.UpdateUIConfigs(); };
+            ShowAmount = config("1 - UI", "Show Amount", Toggle.On, "Show the stack-count text for stackable items, in the item drop display");
+            ShowQuality = config("1 - UI", "Show Quality", Toggle.On, "Show the quality number, in the item drop display");
+            ShowDurability = config("1 - UI", "Show Durability", Toggle.On, "Show the durability bar when applicable, in the item drop display");
+            ShowNoTeleport = config("1 - UI", "Show No Teleport Icon", Toggle.On, "Show icon when item cannot be teleported, in the item drop display");
+            ShowFoodIcon = config("1 - UI", "Show Food Icon", Toggle.On, "Show the food icon for consumables (eitr, health, stamina forks), in the item drop display");
+
+            EventHandler onConfigChanged = (sender, args) => ItemDropDisplayManager.Instance?.ReloadAllConfigs();
+            ShowUIBackground.SettingChanged += onConfigChanged;
+            ShowAmount.SettingChanged += onConfigChanged;
+            ShowQuality.SettingChanged += onConfigChanged;
+            ShowDurability.SettingChanged += onConfigChanged;
+            ShowNoTeleport.SettingChanged += onConfigChanged;
+            ShowFoodIcon.SettingChanged += onConfigChanged;
 
 
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -136,6 +148,11 @@ namespace WorldItemDropDisplay
         internal static ConfigEntry<Vector3> ItemWorldOffset = null!;
         internal static ConfigEntry<Toggle> SubtractCamOffset = null!;
         internal static ConfigEntry<Toggle> ShowUIBackground = null!;
+        internal static ConfigEntry<Toggle> ShowAmount = null!;
+        internal static ConfigEntry<Toggle> ShowQuality = null!;
+        internal static ConfigEntry<Toggle> ShowDurability = null!;
+        internal static ConfigEntry<Toggle> ShowNoTeleport = null!;
+        internal static ConfigEntry<Toggle> ShowFoodIcon = null!;
 
         private ConfigEntry<T> config<T>(string group, string name, T value, ConfigDescription description)
         {

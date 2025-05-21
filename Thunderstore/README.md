@@ -28,6 +28,11 @@ by hand or via UI, either way, changes reload on the fly.
 | **World Item Offset**      | Offset `(X, Y, Z)` relative to each item                                                                         | `(0, 1.2, 0)` |
 | **Subtract Camera Offset** | Subtract the camera offset from the world item display position, might help it look more centered on the object. | `On`          |
 | **Show Background**        | Show the background behind the item, in the item drop display                                                    | `On`          |
+| **Show Amount**            | Show the stack-count text for stackable items, in the item drop display                                          | `On`          |
+| **Show Quality**           | Show the quality number, in the item drop display                                                                | `On`          |
+| **Show Durability**        | Show the durability bar when applicable, in the item drop display                                                | `On`          |
+| **Show No Teleport Icon**  | Show icon when item cannot be teleported, in the item drop display                                               | `On`          |
+| **Show Food Icon**         | Show the food icon for consumables (eitr, health, stamina forks), in the item drop display                       | `On`          |
 
 ## Features
 

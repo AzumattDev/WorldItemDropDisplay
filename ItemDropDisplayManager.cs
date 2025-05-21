@@ -169,7 +169,7 @@ public class ItemDropDisplayManager : MonoBehaviour
         };
 
         worldItem.m_bkg.enabled = ShowUIBackground.Value.IsOn();
-        
+
         worldItems.Add(worldItem);
     }
 
@@ -188,6 +188,16 @@ public class ItemDropDisplayManager : MonoBehaviour
         {
             worldItem.dataDirty = true;
         }
+    }
+
+    public void ReloadAllConfigs()
+    {
+        UpdateUIConfigs();
+
+        foreach (var wi in worldItems)
+            wi.dataDirty = true;
+
+        UpdateData();
     }
 
     public void UpdateUIConfigs()
@@ -280,7 +290,7 @@ public class ItemDropDisplayManager : MonoBehaviour
             }
 
             // amount
-            if (shared.m_maxStackSize > 1)
+            if (ShowAmount.Value.IsOn() && shared.m_maxStackSize > 1)
             {
                 int st = data.m_stack;
                 if (worldItem.lastStack != st)
@@ -297,7 +307,7 @@ public class ItemDropDisplayManager : MonoBehaviour
             }
 
             // quality
-            if (shared.m_maxQuality > 1)
+            if (ShowQuality.Value.IsOn() && shared.m_maxQuality > 1)
             {
                 int q = data.m_quality;
                 if (worldItem.lastQuality != q)
@@ -315,7 +325,8 @@ public class ItemDropDisplayManager : MonoBehaviour
 
             // durability
             float pct = data.GetDurabilityPercentage();
-            bool useD = shared is { m_useDurability: true, m_maxDurability: > 0 } && pct < 1f;
+            bool defaultUseD = shared is { m_useDurability: true, m_maxDurability: > 0 } && pct < 1f;
+            bool useD = ShowDurability.Value.IsOn() && defaultUseD;
             if (worldItem.m_durability.gameObject.activeSelf != useD)
                 worldItem.m_durability.gameObject.SetActive(useD);
 
@@ -326,14 +337,15 @@ public class ItemDropDisplayManager : MonoBehaviour
             }
 
             // no-teleport
-            bool showNoTp = !shared.m_teleportable && !teleportAll;
+            bool defaultShowNoTp = !shared.m_teleportable && !teleportAll;
+            bool showNoTp = ShowNoTeleport.Value.IsOn() && defaultShowNoTp;
             if (worldItem.m_noteleport.enabled != showNoTp)
                 worldItem.m_noteleport.enabled = showNoTp;
 
             // food
             bool isFood = shared.m_itemType == ItemDrop.ItemData.ItemType.Consumable;
             bool hasFood = shared.m_food > 0f || shared.m_foodStamina > 0f || shared.m_foodEitr > 0f;
-            bool showFood = isFood && hasFood;
+            bool showFood = ShowFoodIcon.Value.IsOn() && isFood && hasFood;
             if (worldItem.m_food.enabled != showFood)
                 worldItem.m_food.enabled = showFood;
 
@@ -365,26 +377,13 @@ public class ItemDropDisplayManager : MonoBehaviour
         }
     }
 
-    public void UpdatePositionInterval(float value)
-    {
-        positionInterval = value;
-    }
+    public void UpdatePositionInterval(float v) { positionInterval = v; }
 
-    public void UpdateDataInterval(float value)
-    {
-        dataInterval = value;
-    }
+    public void UpdateDataInterval(float v) { dataInterval = v; }
 
-    public void UpdateMaxDisplayDistance(float value)
-    {
-        maxDisplayDistance = value;
-        maxDistSqr = maxDisplayDistance * maxDisplayDistance;
-    }
+    public void UpdateMaxDisplayDistance(float v) { maxDisplayDistance = v; maxDistSqr = v * v; }
 
-    public void UpdateWorldOffset(Vector3 value)
-    {
-        worldOffset = value;
-    }
+    public void UpdateWorldOffset(Vector3 v) { worldOffset = v; }
 }
 
 public static class StackPatch
