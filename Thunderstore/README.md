@@ -9,6 +9,7 @@
 - **Durability** (with a bar)
 - **Teleport-lock** icon
 - **Food effect** color coding
+- **Name** of the item
 
 `Client only mod, not needed on server.`
 
@@ -20,19 +21,19 @@
 All settings live in `BepInEx/config/Azumatt.WorldItemDropDisplay.cfg` (or use BepInEx’s in-game Config Manager). Edit
 by hand or via UI, either way, changes reload on the fly.
 
-| Setting                    | Description                                                                                                      | Default       |
-|----------------------------|------------------------------------------------------------------------------------------------------------------|---------------|
-| **Position Interval**      | How often (seconds) to refresh UI positions                                                                      | `0.01`        |
-| **Data Interval**          | How often (seconds) to refresh stack/quality data                                                                | `0.01`        |
-| **Max Display Distance**   | Maximum distance (meters) at which markers appear                                                                | `5.0`         |
-| **World Item Offset**      | Offset `(X, Y, Z)` relative to each item                                                                         | `(0, 1.2, 0)` |
-| **Subtract Camera Offset** | Subtract the camera offset from the world item display position, might help it look more centered on the object. | `On`          |
-| **Show Background**        | Show the background behind the item, in the item drop display                                                    | `On`          |
-| **Show Amount**            | Show the stack-count text for stackable items, in the item drop display                                          | `On`          |
-| **Show Quality**           | Show the quality number, in the item drop display                                                                | `On`          |
-| **Show Durability**        | Show the durability bar when applicable, in the item drop display                                                | `On`          |
-| **Show No Teleport Icon**  | Show icon when item cannot be teleported, in the item drop display                                               | `On`          |
-| **Show Food Icon**         | Show the food icon for consumables (eitr, health, stamina forks), in the item drop display                       | `On`          |
+| Setting                     | Description                                                                                                             | Default       |
+|-----------------------------|-------------------------------------------------------------------------------------------------------------------------|---------------|
+| **Position Interval**       | How often (seconds) to refresh UI positions                                                                             | `0.01`        |
+| **Max Display Distance**    | Maximum distance (meters) at which markers appear                                                                       | `10.0`        |
+| **World Item Offset**       | Offset `(X, Y, Z)` relative to each item                                                                                | `(0, 0.5, 0)` |
+| **Show Background**         | Show the background behind the item, in the item drop display                                                           | `Off`         |
+| **Show Amount**             | Show the stack-count text for stackable items, in the item drop display                                                 | `Off`         |
+| **Show Quality**            | Show the quality number, in the item drop display                                                                       | `Off`         |
+| **Show Durability**         | Show the durability bar when applicable, in the item drop display                                                       | `Off`         |
+| **Show No Teleport Icon**   | Show icon when item cannot be teleported, in the item drop display                                                      | `Off`         |
+| **Show Food Icon**          | Show the food icon for consumables (eitr, health, stamina forks), in the item drop display                              | `Off`         |
+| **Show Name**               | Show the item’s localized name                                                                                          | `Off`         |
+| **Toggle ItemDrop Display** | Toggle the item drop display on and off. The display will still turn off when other UI elements are open ignoring this. | `LeftAlt + F` |
 
 ## Features
 
